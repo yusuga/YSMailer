@@ -23,10 +23,11 @@
 
 - (IBAction)mailButtonDidPush:(id)sender
 {
-    [YSMailer showCompseViewControllerWithRecipients:@[@"xxx@yyy.zzz"]
-                                             subject:@"subject"
-                                         messageBody:@"messageBody"
-                                              isHTML:NO];
+    [YSMailer showCompseViewControllerWithParentViewController:self
+                                                    recipients:@[@"xxx@yyy.zzz"]
+                                                       subject:@"subject"
+                                                   messageBody:@"messageBody"
+                                                        isHTML:NO];
 }
 
 @end
