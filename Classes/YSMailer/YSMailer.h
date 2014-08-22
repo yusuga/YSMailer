@@ -10,9 +10,9 @@
 
 @interface YSMailer : NSObject
 
-+ (void)showCompseViewControllerWithRecipients:(NSArray*)recipients
-                                       subject:(NSString*)subject
-                                   messageBody:(NSString*)messageBody
-                                        isHTML:(BOOL)isHTML;
-
++ (void)showCompseViewControllerWithParentViewController:(UIViewController*)parentVC
+                                              recipients:(NSArray*)recipients
+                                                 subject:(NSString*)subject
+                                             messageBody:(NSString*)messageBody
+                                                  isHTML:(BOOL)isHTML;
 @end

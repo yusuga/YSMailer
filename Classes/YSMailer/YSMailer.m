@@ -30,21 +30,24 @@ NSString *YSMailerLocalizedString(NSString *key)
     return __sharedInstance;
 }
 
-+ (void)showCompseViewControllerWithRecipients:(NSArray*)recipients
-                                       subject:(NSString*)subject
-                                   messageBody:(NSString*)messageBody
-                                        isHTML:(BOOL)isHTML
++ (void)showCompseViewControllerWithParentViewController:(UIViewController*)parentVC
+                                              recipients:(NSArray*)recipients
+                                                 subject:(NSString*)subject
+                                             messageBody:(NSString*)messageBody
+                                                  isHTML:(BOOL)isHTML
 {
-    [[self sharedInstance] showCompseViewControllerWithRecipients:recipients
-                                                          subject:subject
-                                                      messageBody:messageBody
-                                                           isHTML:isHTML];
+    [[self sharedInstance] showCompseViewControllerWithParentViewController:parentVC
+                                                                 recipients:recipients
+                                                                    subject:subject
+                                                                messageBody:messageBody
+                                                                     isHTML:isHTML];
 }
 
-- (void)showCompseViewControllerWithRecipients:(NSArray*)recipients
-                                       subject:(NSString*)subject
-                                   messageBody:(NSString*)messageBody
-                                        isHTML:(BOOL)isHTML
+- (void)showCompseViewControllerWithParentViewController:(UIViewController*)parentVC
+                                              recipients:(NSArray*)recipients
+                                                 subject:(NSString*)subject
+                                             messageBody:(NSString*)messageBody
+                                                  isHTML:(BOOL)isHTML
 {
     if ([MFMailComposeViewController canSendMail]) {
         MFMailComposeViewController *vc = [[MFMailComposeViewController alloc] init];
@@ -52,9 +55,9 @@ NSString *YSMailerLocalizedString(NSString *key)
         [vc setToRecipients:recipients];
         [vc setSubject:subject];
         [vc setMessageBody:messageBody isHTML:isHTML];
-        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:vc
-                                                                                     animated:YES
-                                                                                   completion:nil];
+        [parentVC presentViewController:vc
+                               animated:YES
+                             completion:nil];
     } else {
         [[[UIAlertView alloc] initWithTitle:YSMailerLocalizedString(@"Error Mail Title")
                                     message:YSMailerLocalizedString(@"Error Mail Desc")
